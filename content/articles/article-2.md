@@ -1,8 +1,12 @@
 ---
 title: Nuxt.jsでブログを作る
-description:
+description: テスト用の記事
 createdAt: 2021-03-21 01:30:00
 updatedAt: 2021-03-22
+tag:
+  - nuxt.js
+  - vue
+  - SPA
 ---
 
 ## 残タスク
