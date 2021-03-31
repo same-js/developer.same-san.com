@@ -33,7 +33,57 @@ use Illuminate\Support\Facades\DB;
     }
 ```
 
-`DB::commit()` は明示的に実行しなくても、関数が最後まで終了することでコネクションがクローズされ、コミットされる・・・ような気がするが、明示しておくに越したことはない。
+`DB::commit()` は明示的に実行しなくても、関数が最後まで終了することでコネクションがクローズされ、コミットされる・・・ような動きをした気がするが、明示しておくに越したことはない。
+
+## SELECT
+
+### 単一カラムだけ取得したい場合
+* `pluck()` か `value()` を使用する。
+* 取得するレコードが複数ある場合でも、最初の 1件を取得するだけで問題ないなら `value()`
+* 取得するレコードが複数ある場合に、全ての結果を取得したい場合は `pluck()`
+
+#### value()
+* `value()` だと、戻り値は `object` ではなく `string` となる。 `first()` のカラム単一版だと思うと理解が早い。
+
+```php
+$query = $this->model->query();
+$result = $query
+  ->where('type', 1)
+  ->value('name');
+
+gettype($result); // string
+echo ($result) // php
+```
+
+#### pluck()
+* `pluck()` だと、戻り値は `object` となる。
+
+```php
+$query = $this->model->query();
+$result = $query
+  ->where('type', 1)
+  ->pluck('name');
+
+gettype($result); // object
+echo ($result[0]) // php
+echo ($result[1]) // java
+echo ($result[2]) // python
+```
+
+### 関数を使用したい場合
+* select句の中で `DB::raw` を使用し、その中で関数を使用する。
+
+```php
+$query = $this->model->query();
+$query->select(
+  'id',
+  DB::raw('round(rate, 2) as rate'),
+  'name'
+  )
+  ->get();
+```
+
+
 
 ## WHERE
 
