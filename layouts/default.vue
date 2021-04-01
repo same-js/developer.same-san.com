@@ -19,7 +19,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.title" :to="item.to" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -48,7 +48,9 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <NuxtLink :to="title.to">
+        <v-toolbar-title v-text="title.title"/>
+      </NuxtLink>
       <v-spacer />
       <v-btn
         icon
@@ -110,7 +112,10 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: {
+        title: 'Vuetify.js',
+        to: '/'
+      }
     }
   }
 }

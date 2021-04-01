@@ -1,26 +1,27 @@
 <template>
   <div>
-    <input v-model="query" type="search" autocomplete="off" />
+    <h1>tag: {{tag}}</h1>
     <template  v-if="articles.length" >
     <v-card v-for="article of articles" :key="article.slug" class="ma-6 ">
       <v-card-title>
-          <NuxtLink :to="'/detail/'+article.slug">{{ article.title }}</NuxtLink>
+          <NuxtLink :to="'/'+article.slug">{{ article.title }}</NuxtLink>
       </v-card-title>
         <v-container>
           <v-row no-gutters>
-            <div
+            <v-col
               v-for="tag of article.tag"
               :key="tag"
+              cols="4"
+              sm="2"
             >
-              <v-chip
-                class="text-center mx-2 mb-2 px-2 rounded-lg"
-                color="teal darken-2"
-                :to="'/tag/'+tag"
+              <div
+                class="text-center mx-2 pa-0 rounded-lg teal darken-2"
+                outlined
                 tile
               >
                 {{tag}}
-              </v-chip>
-            </div>
+              </div>
+            </v-col>
           </v-row>
         </v-container>
     </v-card>
@@ -30,11 +31,16 @@
 
 <script>
 export default {
-  async asyncData ({ $content }) {
-    const articles = await $content('articles').sortBy('createdAt', 'desc').fetch()
+  async asyncData ({ params, $content }) {
+    const articles = await $content('articles').where({ tag: { $contains: params.id } }).sortBy('createdAt', 'desc').fetch()
 
     return {
       articles
+    }
+  },
+  data () {
+    return {
+      tag: this.$route.params.id
     }
   },
   methods: {
