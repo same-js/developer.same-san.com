@@ -4,24 +4,23 @@
     <template  v-if="articles.length" >
     <v-card v-for="article of articles" :key="article.slug" class="ma-6 ">
       <v-card-title>
-          <NuxtLink :to="'/'+article.slug">{{ article.title }}</NuxtLink>
+          <NuxtLink :to="'/detail/'+article.slug">{{ article.title }}</NuxtLink>
       </v-card-title>
         <v-container>
           <v-row no-gutters>
-            <v-col
-              v-for="tag of article.tag"
-              :key="tag"
-              cols="4"
-              sm="2"
+            <div
+              v-for="hashtag of article.hashtag"
+              :key="hashtag"
             >
-              <div
-                class="text-center mx-2 pa-0 rounded-lg teal darken-2"
-                outlined
+              <v-chip
+                class="text-center mx-2 mb-2 px-2 rounded-lg"
+                color="teal darken-2"
+                :to="'/tag/'+hashtag"
                 tile
               >
-                {{tag}}
-              </div>
-            </v-col>
+                {{hashtag}}
+              </v-chip>
+            </div>
           </v-row>
         </v-container>
     </v-card>
@@ -32,7 +31,7 @@
 <script>
 export default {
   async asyncData ({ params, $content }) {
-    const articles = await $content('articles').where({ tag: { $contains: params.id } }).sortBy('createdAt', 'desc').fetch()
+    const articles = await $content('articles').where({ hashtag: { $contains: params.id } }).sortBy('createdAt', 'desc').fetch()
 
     return {
       articles

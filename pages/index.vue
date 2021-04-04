@@ -1,6 +1,5 @@
 <template>
   <div>
-    <input v-model="query" type="search" autocomplete="off" />
     <template  v-if="articles.length" >
     <v-card v-for="article of articles" :key="article.slug" class="ma-6 ">
       <v-card-title>
@@ -9,16 +8,16 @@
         <v-container>
           <v-row no-gutters>
             <div
-              v-for="tag of article.tag"
-              :key="tag"
+              v-for="hashtag of article.hashtag"
+              :key="hashtag"
             >
               <v-chip
                 class="text-center mx-2 mb-2 px-2 rounded-lg"
                 color="teal darken-2"
-                :to="'/tag/'+tag"
+                :to="'/tag/'+hashtag"
                 tile
               >
-                {{tag}}
+                {{hashtag}}
               </v-chip>
             </div>
           </v-row>

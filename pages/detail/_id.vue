@@ -17,6 +17,24 @@
         </v-row>
       </v-container>
       <nuxt-content :document="page" />
+      <v-container>
+        <v-row no-gutters>
+          <div
+            v-for="hashtag of page.hashtag"
+            :key="hashtag"
+          >
+            <v-chip
+              class="text-center mx-2 mb-2 px-2 rounded-lg"
+              color="teal darken-2"
+              :to="'/tag/'+hashtag"
+              tile
+            >
+              {{hashtag}}
+            </v-chip>
+          </div>
+        </v-row>
+      </v-container>
+      <br>
       <hr>
       <dl>
         <div>
