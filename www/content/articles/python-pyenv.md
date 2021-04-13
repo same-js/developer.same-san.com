@@ -44,20 +44,22 @@ $ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\
 ```
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 ```
 
 パスを通したら、 下記コマンドで `.bash_profile` の変更をターミナルに反映させる。  
 （`.bash_profile` は、下記コマンド実行時か、Macユーザのログイン時にしか読み込みされない）
 
 ```sh
-$ source .bash_profile
+$ source ~/.bash_profile
 ```
 
-## 現在のバージョンを確認
+## 現在のPythonのバージョンを確認
 
 ```sh
-$ pyenv --version
+$ python --version
 ```
 
 ## インストール可能なpythonのバージョン一覧を確認
