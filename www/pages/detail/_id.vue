@@ -5,12 +5,12 @@
       <v-container>
         <v-row no-gutters>
           <v-col cols="12" sm="4">
-            <div class="text-center ma-2 pa-2 rounded-lg teal darken-2">
+            <div class="text-center ma-2 pa-2 rounded-lg accent_chip">
               執筆：{{ formatDate(page.createdAt) }}
             </div>
           </v-col>
           <v-col cols="12" sm="4">
-            <div class="text-center ma-2 pa-2 rounded-lg teal darken-2">
+            <div class="text-center ma-2 pa-2 rounded-lg accent_chip">
               更新：{{ formatDate(page.updatedAt) }}
             </div>
           </v-col>
@@ -25,7 +25,7 @@
           >
             <v-chip
               class="text-center mx-2 mb-2 px-2 rounded-lg"
-              color="teal darken-2"
+              color="chip"
               :to="'/tag/'+hashtag"
               tile
             >
@@ -54,6 +54,11 @@
 </template>
 <script>
 export default {
+  head () {
+    return {
+      title: this.page.title
+    }
+  },
   async asyncData ({ params, $content }) {
     const page = await $content('articles', params.id).fetch()
 

@@ -113,7 +113,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: {
-        title: 'Vuetify.js',
+        title: this.$config.sitename,
         to: '/'
       }
     }

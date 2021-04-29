@@ -14,7 +14,7 @@
             >
               <v-chip
                 class="text-center mx-2 mb-2 px-2 rounded-lg"
-                color="teal darken-2"
+                color="chip"
                 :to="'/tag/'+hashtag"
                 tile
               >
