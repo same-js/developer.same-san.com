@@ -1,11 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
 
 const siteName = '技術ブログ'
+const siteURL = 'http://localhost:3000'
 
 export default {
   // 動的な設定をグローバルに参照できるようにする
   publicRuntimeConfig: {
-    sitename: siteName
+    sitename: siteName,
+    siteurl: siteURL
   },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,

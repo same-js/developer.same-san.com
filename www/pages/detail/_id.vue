@@ -1,56 +1,75 @@
 <template>
+  <div>
     <article>
       <h1>{{ page.title }}</h1>
-      <!-- 日付 -->
-      <v-container>
-        <v-row no-gutters>
-          <v-col cols="12" sm="4">
-            <div class="text-center ma-2 pa-2 rounded-lg accent_chip">
-              執筆：{{ formatDate(page.createdAt) }}
-            </div>
-          </v-col>
-          <v-col cols="12" sm="4">
-            <div class="text-center ma-2 pa-2 rounded-lg accent_chip">
-              更新：{{ formatDate(page.updatedAt) }}
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
+      <!-- パンくずリスト -->
+      <div class="breadcrumbs">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem">
+            <NuxtLink itemprop="item" to="/">
+              <span itemprop="name">TOP</span>
+            </NuxtLink>
+            <meta itemprop="position" content="1" />
+          </li>
+          ›
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem">
+            <NuxtLink
+              itemscope
+              itemtype="https://schema.org/WebPage"
+              itemprop="item"
+              itemid="https://example.com/books/sciencefiction"
+              :to="'/tag/'+page.hashtag[0]">
+              <span itemprop="name">{{ page.hashtag[0] }}</span>
+            </NuxtLink>
+            <meta itemprop="position" content="2" />
+          </li>
+          ›
+          <li
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem">
+            <span itemprop="name">{{page.title}}</span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </div>
       <nuxt-content :document="page" />
-      <v-container>
-        <v-row no-gutters>
-          <div
-            v-for="hashtag of page.hashtag"
-            :key="hashtag"
-          >
-            <v-chip
-              class="text-center mx-2 mb-2 px-2 rounded-lg"
-              color="chip"
-              :to="'/tag/'+hashtag"
-              tile
-            >
-              {{hashtag}}
-            </v-chip>
-          </div>
-        </v-row>
-      </v-container>
       <br>
-      <hr>
-      <dl>
-        <div>
-          <dt>作成日</dt>
-          <dd>
-          {{ formatDate(page.createdAt) }}
-          </dd>
-        </div>
-        <div>
-          <dt>更新日</dt>
-          <dd>
-          {{ formatDate(page.updatedAt) }}
-          </dd>
-        </div>
-      </dl>
     </article>
+    <!-- タグ -->
+    <div class="tag-list">本記事のタグ</div>
+    <v-container>
+      <v-row no-gutters>
+        <div
+          v-for="hashtag of page.hashtag"
+          :key="hashtag"
+        >
+          <v-chip
+            class="text-center mx-2 mb-2 px-2 rounded-lg"
+            color="chip"
+            :to="'/tag/'+hashtag"
+            tile
+          >
+            {{hashtag}}
+          </v-chip>
+        </div>
+      </v-row>
+    </v-container>
+    <!-- 日付 -->
+    <v-container>
+      <v-row no-gutters>
+          <div class="text-center mx-2 pa-2 rounded-lg accent_chip">
+            執筆：<time :datetime="formatDate(page.createdAt)">{{ formatDate(page.createdAt) }}</time>
+          </div>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 <script>
 export default {
