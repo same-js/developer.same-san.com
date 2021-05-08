@@ -3,7 +3,7 @@
     <article>
       <h1>{{ page.title }}</h1>
       <!-- パンくずリスト -->
-      <div class="breadcrumbs">
+      <v-card outlined class="breadcrumbs">
         <ol itemscope itemtype="https://schema.org/BreadcrumbList">
           <li
             itemprop="itemListElement"
@@ -38,37 +38,42 @@
             <meta itemprop="position" content="3" />
           </li>
         </ol>
-      </div>
-      <nuxt-content :document="page" />
-      <br>
+      </v-card>
+      <!-- 本文 -->
+      <v-card outlined class="my-8 px-2 py-10">
+          <nuxt-content :document="page" />
+      </v-card>
     </article>
-    <!-- タグ -->
-    <div class="tag-list">本記事のタグ</div>
-    <v-container>
-      <v-row no-gutters>
-        <div
-          v-for="hashtag of page.hashtag"
-          :key="hashtag"
-        >
-          <v-chip
-            class="text-center mx-2 mb-2 px-2 rounded-lg"
-            color="chip"
-            :to="'/tag/'+hashtag"
-            tile
+    <v-card outlined class="my-8 px-2">
+      <!-- 日付 -->
+      <v-container>
+        <v-row no-gutters>
+            <div class="text-center mx-2 pa-2 rounded-lg">
+              執筆日：<time :datetime="formatDate(page.createdAt)">{{ formatDate(page.createdAt) }}</time>
+            </div>
+        </v-row>
+      </v-container>
+      <v-divider />
+      <!-- タグ -->
+      <v-container>
+        <v-card-title>本記事のタグ</v-card-title>
+        <v-row no-gutters>
+          <div
+            v-for="hashtag of page.hashtag"
+            :key="hashtag"
           >
-            {{hashtag}}
-          </v-chip>
-        </div>
-      </v-row>
-    </v-container>
-    <!-- 日付 -->
-    <v-container>
-      <v-row no-gutters>
-          <div class="text-center mx-2 pa-2 rounded-lg accent_chip">
-            執筆：<time :datetime="formatDate(page.createdAt)">{{ formatDate(page.createdAt) }}</time>
+            <v-chip
+              class="text-center mx-2 mb-2 px-2 rounded-lg"
+              color="chip"
+              :to="'/tag/'+hashtag"
+              tile
+            >
+              {{hashtag}}
+            </v-chip>
           </div>
-      </v-row>
-    </v-container>
+        </v-row>
+      </v-container>
+    </v-card>
   </div>
 </template>
 <script>

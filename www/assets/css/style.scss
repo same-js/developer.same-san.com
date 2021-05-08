@@ -27,8 +27,8 @@
 // nuxt/content 記事本文のスタイル
 .nuxt-content {
     p,div, ul {
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
     ul {
         margin-bottom: 16px; // 16px は Vuetify における pタグ margin-bottom
@@ -93,6 +93,11 @@ article h1 {
     padding-top: 5px;
     padding-bottom: 5px;
     margin-bottom: 20px;
+    
+    ol {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
     
     list-style-type: none; // パンクズリストのリスト記号を非表示にする
     li {
