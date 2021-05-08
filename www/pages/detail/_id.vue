@@ -75,7 +75,13 @@
 export default {
   head () {
     return {
-      title: this.page.title
+      title: this.page.title,
+      meta: [
+        {
+          name: 'date',
+          content: this.formatDate(this.page.createdAt)
+        }
+      ]
     }
   },
   async asyncData ({ params, $content }) {
