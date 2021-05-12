@@ -81,12 +81,7 @@ export default {
   head () {
     return {
       title: this.page.title,
-      meta: [
-        {
-          name: 'date',
-          content: this.formatDate(this.page.createdAt)
-        }
-      ]
+      meta: this.makeMeta(this.page)
     }
   },
   async asyncData ({ params, $content }) {
@@ -114,6 +109,26 @@ export default {
     // ゼロ埋め（共通関数化を検討）
     zeroPadding (value, length) {
       return ('0000000000' + value).slice(-length)
+    },
+    makeMeta (page) {
+      const meta = []
+      // 執筆日
+      meta.push(
+        {
+          name: 'date',
+          content: this.formatDate(page.createdAt)
+        }
+      )
+      // noindex 判定
+      if (page.metas && Array.isArray(page.metas) && page.metas.includes('noindex')) {
+        meta.push(
+          {
+            name: 'robots',
+            content: 'noindex'
+          }
+        )
+      }
+      return meta
     }
   }
 }
