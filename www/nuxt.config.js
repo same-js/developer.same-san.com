@@ -99,5 +99,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  generate: {
+    crawler: false,
+    async routes () {
+      const { $content } = require('@nuxt/content')
+      const files = await $content('articles').only(['slug']).fetch()
+
+      return files.map(file => file.slug === '/index' ? '/' : 'detail/' + file.slug)
+    }
   }
 }
