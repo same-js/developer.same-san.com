@@ -1,7 +1,8 @@
-// Vuetify.js の コードブロック style を無効化
+// 全ての code に対して フォント を適用する（日本語フォントは検討の余地あり）
 .v-application code {
-  all: unset !important;
+  font-family: "SFMono-Regular","Consolas","Liberation Mono","Menlo","monospace" !important;
 }
+
 
 // コードブロックで ファイル名を右上に表示する
 .nuxt-content .nuxt-content-highlight>.filename {
@@ -22,6 +23,12 @@
 }
 .nuxt-content-highlight {
     position: relative;
+}
+
+// Vuetify.js の コードブロック style を無効化
+.nuxt-content-highlight code {
+    background-color: unset !important;
+    padding: unset !important;
 }
 
 // nuxt/content 記事本文のスタイル
@@ -50,6 +57,19 @@
         margin-bottom: 30px;
     }
     
+    details {
+        background-color: var(--v-accent-base);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 30px;
+    }
+    summary::after {
+        content: "\A---------"; // TODO さすがに雑すぎる
+        white-space: pre ;
+    }
+    
     h2{
         border-bottom: solid 3px var(--v-accent_chip-base);
     }
@@ -67,6 +87,21 @@
     h4:before {
             color: var(--v-accent-base);
             content: '● ';
+    }
+    
+    table, th, tr, td {
+        border: 1px #666 solid; // TODO 色なんとかする
+        border-collapse: collapse;
+    }
+    table {
+        width: 100%;
+    }
+    th {
+        background-color: #666;
+        padding: 10px;
+    }
+    td {
+        padding: 10px;
     }
 }
 
@@ -99,7 +134,7 @@ article h1 {
         padding-right: 5px !important;
     }
     
-    list-style-type: none; // パンクズリストのリスト記号を非表示にする
+    list-style-type: none; // パンくずリストのリスト記号を非表示にする
     li {
         display: inline; // パンくずリストを横並びにする
     }
