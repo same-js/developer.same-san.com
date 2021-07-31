@@ -56,7 +56,7 @@
         icon
         @click.stop="rightDrawer = !rightDrawer"
       >
-        <v-icon>mdi-menu</v-icon>
+        <!-- <v-icon>mdi-menu</v-icon> -->
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -64,7 +64,8 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
+    <!-- TODO ここに darkmode 切り替えトグルを設置したい -->
+    <!-- <v-navigation-drawer
       v-model="rightDrawer"
       :right="right"
       temporary
@@ -80,7 +81,7 @@
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-footer
       :absolute="!fixed"
       app
