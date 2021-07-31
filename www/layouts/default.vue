@@ -9,9 +9,11 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in leftManuItems"
           :key="i"
           :to="item.to"
+          :href="item.href"
+          :target="item.target"
           router
           exact
         >
@@ -19,8 +21,9 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" :to="item.to" />
+            <v-list-item-title v-text="item.title" :to="item.to" :href="item.href" />
           </v-list-item-content>
+          <v-icon v-if="item.href">mdi-open-in-new</v-icon>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -30,24 +33,27 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <!-- ＜ ボタン -->
       <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
-      <v-btn
+      <!-- □ ボタン -->
+      <!-- <v-btn
         icon
         @click.stop="clipped = !clipped"
       >
         <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
+      </v-btn> -->
+      <!-- ー ボタン -->
+      <!-- <v-btn
         icon
         @click.stop="fixed = !fixed"
       >
         <v-icon>mdi-minus</v-icon>
-      </v-btn>
+      </v-btn> -->
       <NuxtLink :to="title.to">
         <v-toolbar-title v-text="title.title"/>
       </NuxtLink>
@@ -98,16 +104,17 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      leftManuItems: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Top',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-github',
+          title: 'GitHub',
+          href: 'https://github.com/same-js',
+          target: '_blank'
         }
       ],
       miniVariant: false,
