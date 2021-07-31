@@ -8,6 +8,11 @@
       app
     >
       <v-list>
+        <v-list-item>
+          <v-list-item-action>
+            <v-icon @click.stop="miniVariant = !miniVariant">mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+          </v-list-item-action>
+        </v-list-item>
         <v-list-item
           v-for="(item, i) in leftManuItems"
           :key="i"
@@ -34,12 +39,12 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- ＜ ボタン -->
-      <v-btn
+      <!-- <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
+      </v-btn> -->
       <!-- □ ボタン -->
       <!-- <v-btn
         icon
@@ -117,7 +122,7 @@ export default {
           target: '_blank'
         }
       ],
-      miniVariant: false,
+      miniVariant: true,
       right: true,
       rightDrawer: false,
       title: {
