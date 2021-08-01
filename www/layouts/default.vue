@@ -59,7 +59,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <NuxtLink :to="title.to">
+      <NuxtLink :to="title.to" class="blog-title-href">
         <v-toolbar-title v-text="title.title"/>
       </NuxtLink>
       <v-spacer />

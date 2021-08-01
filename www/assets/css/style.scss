@@ -31,6 +31,15 @@
     padding: unset !important;
 }
 
+// blog title 部分のリンク下線有無と文字色の指定
+a.blog-title-href {
+    text-decoration: none;
+    div {
+        color: #FFFFFF; // TODO ライトモード実装時は 変数に修正する必要があるかもしれない
+        font-weight: 900;
+    }
+}
+
 // nuxt/content 記事本文のスタイル
 .nuxt-content {
     p,div, ul {
