@@ -1,3 +1,8 @@
+//全ての aタグの 下線を非表示にする
+a {
+    text-decoration: none;
+}
+
 // 全ての code に対して フォント を適用する（日本語フォントは検討の余地あり）
 .v-application code {
   font-family: "SFMono-Regular","Consolas","Liberation Mono","Menlo","monospace" !important;
