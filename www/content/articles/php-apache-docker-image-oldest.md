@@ -59,3 +59,7 @@ $ docker-compose up -d
 
 ただ、最初にも書いたことだが、PHP5系は そもそも最新の `PHP5.6` ですらサポートが切れている。特段の事情がない限りは、サポート内の `PHP7.3` 以降、可能であれば `PHP8.0` 以降を使うべきである。
 * https://www.php.net/supported-versions.php
+
+## 余談
+`php:5.5-apache` では `vim-gtk3` がデフォルトではインストールできない。
+代わりに `vim-gnome` をインストールするのが早い。
