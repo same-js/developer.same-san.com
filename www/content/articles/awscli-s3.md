@@ -9,8 +9,40 @@ hashtag:
   - s3
 ---
 
+## プロファイルの指定
+
+```
+aws --profile myapp s3 ls
+```
+`--profile myapp` で、プロファイル `myapp` を指定して実行する。  
+`--profile`を使用する場合は、 `aws` の直後に書くとよい。
+
+
+## アップロード（同期）
+
+### 一般公開の権限でファイルをアップロードする場合
+
+`--acl public-read` を付与すれば良い。
+
+```
+aws s3 sync . s3://BUCKET_NAME/directory_name --acl public-read
+```
+
+S3バケット側で `パブリックアクセス設定` が正常に設定されていない場合は、これを付与するとエラーになるため、注意。
+
+### アップロード元に存在しないファイルは削除する場合
+
+`--delete` を付与すれば良い。
+
+```
+aws s3 sync . s3://BUCKET_NAME/directory_name --delete
+```
+
+## 一覧表示・参照
+
 ### s3オブジェクトの一覧表示
 https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-services-s3-commands.html#using-s3-commands-listing-buckets
+
 ```
 aws --profile myapp s3 ls
 ```
