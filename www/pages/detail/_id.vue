@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <v-container>
     <article>
       <h1>{{ page.title }}</h1>
       <!-- パンくずリスト -->
-      <v-card outlined class="breadcrumbs">
+      <v-card
+        outlined
+        class="breadcrumbs mx-auto"
+        :max-width="$config.contentmaxwidth"
+      >
         <ol itemscope itemtype="https://schema.org/BreadcrumbList">
           <li
             itemprop="itemListElement"
@@ -40,11 +44,19 @@
         </ol>
       </v-card>
       <!-- 本文 -->
-      <v-card outlined class="my-8 px-2 py-10">
+      <v-card
+        outlined
+        class="my-8 mx-auto px-2 py-10"
+        :max-width="$config.contentmaxwidth"
+      >
           <nuxt-content :document="page" />
       </v-card>
     </article>
-    <v-card outlined class="my-8 px-2">
+    <v-card
+      outlined
+      class="my-8 px-2 mx-auto"
+      :max-width="$config.contentmaxwidth"
+      >
       <!-- 日付 -->
       <v-container>
         <v-row no-gutters>
@@ -74,7 +86,7 @@
         </v-row>
       </v-container>
     </v-card>
-  </div>
+  </v-container>
 </template>
 <script>
 export default {

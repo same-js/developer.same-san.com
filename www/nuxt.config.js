@@ -2,12 +2,14 @@ import colors from 'vuetify/es5/util/colors'
 
 const siteName = '技術ブログ'
 const siteURL = 'http://localhost:3000'
+const contentMaxWidth = '800'
 
 export default {
   // 動的な設定をグローバルに参照できるようにする
   publicRuntimeConfig: {
     sitename: siteName,
-    siteurl: siteURL
+    siteurl: siteURL,
+    contentmaxwidth: contentMaxWidth
   },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: true,
