@@ -10,6 +10,8 @@ hashtag:
 
 普通に scss を書いて当ててもいいのだが、 Vuetify の機能に頼って実現する場合、どうしたら良いかという備忘。
 
+今回は v-card Component を前提とするが、他の Component でも応用は効くはず。
+
 ## 手順
 
 ### 最大幅を指定
@@ -25,7 +27,7 @@ hashtag:
 
 ### 水平中央に配置
 
-`v-card` の最大幅（`max-width`） を `800px` に指定しただけだと、その最大幅を上限として、左寄せで配置されてしまう。  
+先述の指定のみの場合、その最大幅を上限として、「左寄せ」で配置されてしまう。
 
 そこで [spacing helper](https://vuetifyjs.com/ja/styles/spacing/) を用いて、 左右の padding を auto に指定する。  
 具体的には、左右中央 に 配置したい Component の class に `mx-auto` を付与する。
