@@ -28,13 +28,20 @@
 </template>
 <script>
 export default {
+  props: ['hashtag'],
   data () {
     return {
       articles: []
     }
   },
   async fetch () {
-    this.articles = await this.$content('articles').sortBy('createdAt', 'desc').fetch()
+    this.articles = await this.$content('articles').where(
+      function (hashtag) {
+        if (hashtag) {
+          return { hashtag: { $contains: hashtag } }
+        }
+      }(this.hashtag)
+    ).sortBy('createdAt', 'desc').fetch()
   },
   methods: {
     // 日付を返す
