@@ -87,7 +87,7 @@ $query->select(
 
 ## WHERE
 
-### 否定演算子
+### 否定演算子（NOT）
 Eloquent では、SQL でいうところの `NOT` 句を作成するメソッドは無いらしい。  
 下記のように、入れ子の中で作成した複数の条件をまとめて否定したい場合に、 `NOT` 句が使えると便利なのだが・・・
 
@@ -109,7 +109,7 @@ $conditions = ['a', 'b', 'c'];
 $query = $this->model->query();
 
 $query->where(
-  function ($query) use ($condition) {
+  function ($query) use ($conditions) {
     foreach ($conditions as $condition) {
       $query->orWhere('name', 'LIKE', '%' . $condition);
     }
