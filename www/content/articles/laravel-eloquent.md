@@ -2,7 +2,7 @@
 title: Laravel Eloquent 個人用チートシート
 description:
 createdAt: 2021-03-31
-updatedAt: 2021-03-31
+updatedAt: 2021-08-11
 hashtag:
   - Laravel
   - Eloquent
@@ -97,6 +97,27 @@ from users
 where not (`created_at` = 2021-03-31 and `updated_at` = 2021-03-31)
 ```
 
+### 複数の値による曖昧検索（LIKE IN）
+
+`whereNotIn` という関数は存在するが、これをうまく使用して `LIKE IN` 検索を行うことはできない。  
+（そもそも、MySQL 自体が `LIKE` と `IN` を組み合わせた検索に対応していない）
+
+簡単かつ擬似的に対応する方法としては、（泥臭いやり方だが）次のように、 配列を foreach で回し or で結合していく、という方法がある。
+
+```php
+$conditions = ['a', 'b', 'c'];
+$query = $this->model->query();
+
+$query->where(
+  function ($query) use ($condition) {
+    foreach ($conditions as $condition) {
+      $query->orWhere('name', 'LIKE', '%' . $condition);
+    }
+  }
+)
+```
+
+もう少し綺麗に書く方法として `regexp` を使用するという手段もあるようだが、こちらはまだ検証できていない。
 
 ### 入れ子
 クロージャー（ `function () use () {}` ）を使う。
