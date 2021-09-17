@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="articles.length">
-    <v-card outlined v-for="article of articles" :key="article.slug" class="ma-6">
+    <v-card outlined v-for="article of articles" :key="article.slug" class="ma-6 mx-auto" :max-width="$config.contentmaxwidth">
       <v-card-title>
           <NuxtLink :to="'/detail/'+article.slug">{{ article.title }}</NuxtLink>
       </v-card-title>
