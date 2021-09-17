@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
-const siteName = '技術ブログ'
-const siteURL = 'http://localhost:3000'
+const siteName = process.env.SITE_NAME
+const siteURL = process.env.SITE_URL
 const contentMaxWidth = '800'
 
 export default {
@@ -124,7 +124,7 @@ export default {
         link: baseUrlArticles,
         category: ['Vue']
       }
-      const articles = await $content('articles', { text: true }).fetch()
+      const articles = await $content('articles', { text: true }).sortBy('createdAt', 'desc').fetch()
 
       articles.forEach((article) => {
         const url = `${baseUrlArticles}/${article.slug}`
