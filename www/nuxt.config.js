@@ -30,7 +30,8 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'alternate', type: 'application/rss+xml', href: siteURL + '/feed', title: 'RSS2.0' }
     ]
   },
 
@@ -58,7 +59,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/feed'
   ],
 
   // nuxt/content をカスタマイズする
@@ -103,5 +105,53 @@ export default {
   build: {
   },
   generate: {
+  },
+  feed () {
+    const baseUrlArticles = siteURL
+    const baseLinkFeedArticles = 'feed/articles'
+    const feedFormats = {
+      rss: { type: 'rss2', file: 'feed/' }
+      // rss: { type: 'rss2', file: 'rss.xml' }
+      // atom: { type: 'atom1', file: 'atom.xml' }
+      // json: { type: 'json1', file: 'feed.json' }
+    }
+    const { $content } = require('@nuxt/content')
+
+    const createFeedArticles = async function (feed) {
+      feed.options = {
+        title: siteName,
+        description: 'I write about technology.',
+        link: baseUrlArticles,
+        category: ['Vue']
+      }
+      const articles = await $content('articles', { text: true }).fetch()
+
+      articles.forEach((article) => {
+        const url = `${baseUrlArticles}/${article.slug}`
+
+        feed.addItem({
+          title: article.title,
+          id: url,
+          link: url,
+          date: new Date(article.createdAt), // article.published,
+          description:
+            (
+              article.hashtag
+                ? '【' + Object.values(article.hashtag).join(',') + '】'
+                : ''
+            )
+            + article.text.replace(/\r?\n/g, ' ').slice(0, 100),
+          content: article.text.replace(/\r?\n/g, ' ').slice(0, 100),
+          author: 'test@example.com',
+          guid: article.slug
+        })
+      })
+    }
+
+    return Object.values(feedFormats).map(({ file, type }) => ({
+      path: `${file}`,
+      type,
+      create: createFeedArticles
+    }))
   }
 }
