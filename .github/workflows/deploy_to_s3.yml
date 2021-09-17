@@ -48,7 +48,7 @@ jobs:
           
       - name: Deploy dist to s3 (Production)
         run: |
-          aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete --content-type "text/html"
+          aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
         working-directory: www
         
       - name: Remove Cloudfront cache
