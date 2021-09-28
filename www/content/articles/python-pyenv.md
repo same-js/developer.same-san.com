@@ -1,8 +1,8 @@
 ---
-title: Python pyenv 使い方
+title: 【Mac】Python pyenv 使い方
 description:
 createdAt: 2021-04-09
-updatedAt: 2021-04-09
+updatedAt: 2021-09-28
 hashtag:
   - Python
   - pyenv
@@ -36,7 +36,7 @@ pyenv で選択したバージョンがMacで有効になるためには、 `~/.
 ```sh
 $ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
 $ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-$ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+$ echo 'eval "$(pyenv init --path)"' >> ~/.bash_profile
 ```
 
 直接 `~/.bash_profile` を開いて、直接下記を書き込んでも良い。
@@ -44,13 +44,34 @@ $ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\
 ```
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+```
+
+パスを通したら、 下記コマンドで `.bash_profile` の変更をターミナルに反映させる。  
+（`.bash_profile` は、下記コマンド実行時か、Macユーザのログイン時にしか読み込みされない）
+
+<details>
+<summary>
+「pyenv init -」と「pyenv init --path」の違いについて
+</summary>
+
+旧来の pyenv では下記の書き方で問題なく動いていた（公式ドキュメントにもこの書き方を推奨されていた）が、
+
+```bash
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 ```
 
-パスを通したら、 下記コマンドで `.bash_profile` の変更をターミナルに反映させる。  
-（`.bash_profile` は、下記コマンド実行時か、Macユーザのログイン時にしか読み込みされない）
+最新では pyenv では下記の書き方でないと動かなくなっている。
+
+```bash
+eval "$(pyenv init --path)"
+```
+
+https://github.com/pyenv/pyenv#homebrew-on-mac-os-x
+
+</details>
 
 ```sh
 $ source ~/.bash_profile
