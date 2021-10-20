@@ -128,7 +128,7 @@ export default {
       const articles = await $content('articles', { text: true }).sortBy('createdAt', 'desc').fetch()
 
       articles.forEach((article) => {
-        const url = `${baseUrlArticles}/${article.slug}`
+        const url = `${baseUrlArticles}/detail/${article.slug}`
         const shortText = article.text
           .replaceAll(/</g, '')
           .replaceAll(/>/g, '')
