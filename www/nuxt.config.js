@@ -144,7 +144,7 @@ export default {
             + article.text.replace(/\r?\n/g, ' ').slice(0, 100),
           content: article.text.replace(/\r?\n/g, ' ').slice(0, 100),
           author: 'test@example.com',
-          guid: article.slug
+          guid: url
         })
       })
     }
