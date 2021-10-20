@@ -129,6 +129,13 @@ export default {
 
       articles.forEach((article) => {
         const url = `${baseUrlArticles}/${article.slug}`
+        const shortText = article.text
+          .replaceAll(/</g, '')
+          .replaceAll(/>/g, '')
+          .replaceAll(/\[/g, '')
+          .replaceAll(/\]/g, '')
+          .replace(/\r?\n/g, ' ')
+          .slice(0, 100)
 
         feed.addItem({
           title: article.title,
@@ -140,9 +147,8 @@ export default {
               article.hashtag
                 ? '【' + Object.values(article.hashtag).join(',') + '】'
                 : ''
-            )
-            + article.text.replace(/\r?\n/g, ' ').slice(0, 100),
-          content: article.text.replace(/\r?\n/g, ' ').slice(0, 100),
+            ) + shortText,
+          content: shortText,
           author: 'test@example.com',
           guid: url
         })
