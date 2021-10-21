@@ -81,9 +81,10 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true, // enable variables.scss on localhost (`npm run dev`)
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
+          text: colors.grey.lighten4,
           primary: colors.blue.lighten1, // aタグの色はここを参照する
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
@@ -91,6 +92,12 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+          chip: colors.grey.darken3,
+          accent_chip: colors.blue.darken3
+        },
+        light: {
+          text: colors.grey.darken4,
+          accent: colors.grey.darken3,
           chip: colors.grey.darken3,
           accent_chip: colors.blue.darken3
         }

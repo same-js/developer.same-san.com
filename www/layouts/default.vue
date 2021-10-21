@@ -60,14 +60,11 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
       <NuxtLink :to="title.to" class="blog-title-href">
-        <v-toolbar-title v-text="title.title"/>
+        <v-toolbar-title v-text="title.title" :class="titleColor"/>
       </NuxtLink>
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <!-- <v-icon>mdi-menu</v-icon> -->
+      <v-btn icon  @click="theme = nextTheme">
+        <v-icon>{{themeIcon}}</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -106,13 +103,17 @@
 export default {
   data () {
     return {
+      theme: '',
+      themeIcon: '',
+      titleColor: 'grey--text text--lighten-4',
+      nextTheme: '',
       clipped: false,
       drawer: false,
       fixed: false,
       leftManuItems: [
         {
-          icon: 'mdi-apps',
-          title: 'Top',
+          icon: 'mdi-home',
+          title: 'Home',
           to: '/'
         },
         {
@@ -128,6 +129,42 @@ export default {
       title: {
         title: this.$config.sitename,
         to: '/'
+      }
+    }
+  },
+  mounted () {
+    if (sessionStorage.theme) {
+      this.theme = sessionStorage.theme
+    } else {
+      this.theme = 'os'
+    }
+  },
+  watch: {
+    theme (newValue) {
+      const lightTitleText = 'grey--text text--darken-4'
+      const darkTitleText = 'grey--text text--lighten-4'
+      if (!newValue) {
+        newValue = sessionStorage.theme ? 'dark' : 'light'
+      }
+      sessionStorage.theme = newValue
+      this.theme = newValue
+      if (newValue === 'os') {
+        this.$vuetify.theme.dark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      } else {
+        this.$vuetify.theme.dark = (newValue === 'dark')
+      }
+      if (newValue === 'os') {
+        this.themeIcon = 'mdi-laptop'
+        this.nextTheme = 'light'
+        this.titleColor = this.$vuetify.theme.dark ? darkTitleText : lightTitleText
+      } else if (newValue === 'light') {
+        this.themeIcon = 'mdi-white-balance-sunny'
+        this.nextTheme = 'dark'
+        this.titleColor = lightTitleText
+      } else if (newValue === 'dark') {
+        this.themeIcon = 'mdi-moon-waxing-crescent'
+        this.nextTheme = 'os'
+        this.titleColor = darkTitleText
       }
     }
   }
