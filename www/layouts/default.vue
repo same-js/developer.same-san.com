@@ -133,11 +133,13 @@ export default {
     }
   },
   mounted () {
-    if (sessionStorage.theme) {
-      this.theme = sessionStorage.theme
-    } else {
-      this.theme = 'os'
-    }
+    this.$nextTick(function () {
+      if (sessionStorage.theme) {
+        this.theme = sessionStorage.theme
+      } else {
+        this.theme = 'os'
+      }
+    })
   },
   watch: {
     theme (newValue) {
