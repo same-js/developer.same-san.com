@@ -49,6 +49,8 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) =
 }
 ```
 
+上記の通り削除を行ったら、次のコマンドで実行可能。
+
 ```bash
 $ sls invoke local -f hello
 ```
